@@ -815,6 +815,46 @@ h2 {
   border-bottom: 1px solid var(--rule);
 }
 
+/* See the morning — live Empty Wing */
+
+.slide--see {
+  gap: 0.65rem;
+  max-width: 32rem;
+  align-content: start;
+  padding-bottom: 1.5rem;
+}
+
+.slide--see h1 {
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+}
+
+.see-line {
+  margin: 0;
+  color: var(--mute);
+  font-size: clamp(1rem, 1.7vw, 1.15rem);
+}
+
+.outlink {
+  color: var(--brass);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid var(--brass);
+  width: fit-content;
+  padding-bottom: 0.08rem;
+  font-size: 1.05rem;
+}
+
+.outlink:hover,
+.outlink:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.slide--split .split__lead h1 {
+  font-size: clamp(1.85rem, 3.7vw, 3.05rem);
+  max-width: 14ch;
+}
+
 /* 11 ask */
 
 .slide--ask {
