@@ -1,17 +1,18 @@
 (() => {
-  const TOTAL = 11;
   const NOTES = {
-    1: "The pastor just hosts. We run the weekday school. No bill. Not Sunday software.",
-    2: "Elder boards will not open on hope. An unsigned year is how a church gets hurt.",
-    3: "The pastor just hosts. We take the year. Signed money, or the door stays shut.",
-    4: "Host glance. School office. Family enrolls and never sees a bill. Morning is Formation.",
-    5: "Families never see a bill. The door opens only when the money is signed — gifts and instruments, not a handshake. Florida first. Texas waits.",
-    6: "Build the weekday operating system. License academics. Church staff do not live in vendor consoles.",
-    7: "K–5 never logs in. 6–8 only if needed, and tightly. What this campus believes is theirs; we do not write it.",
-    8: "Company builds. Operator runs the year. Capital is signed gifts — not vibes.",
-    9: "About −$125k at 60 ESA-only seats. Break-even near 96. Past 800 attendance, or you pay to find families.",
-    10: "Wrong category on purpose. The shelf is the weekday school of record.",
-    11: "Ask: walk an empty Florida wing, then sit a morning. One campus. Signed gifts. A door that stays shut until coverage is real.",
+    1: "The pastor just hosts. We run the weekday school. Families never see a bill.",
+    2: "Problem only. The last line is elder fear — not our model. They will not open on hope.",
+    3: "We are the school of record. If the campus closes, we wind it down. The church was never the operator.",
+    4: "Host glance. School office is where we run screening, safety, the year. Family never sees a bill. Morning is Formation.",
+    5: "The door opens only when the money is signed. Escrow before hire. Florida first. Texas waits.",
+    6: "Compliance, screening, child-safety are our ops — not a church chore.",
+    7: "Statement of Faith: we do not write the words. The founder holds the text. The platform requires assent.",
+    8: "K–5 children are records. No child login. If the campus ends, we wind it down.",
+    9: "We build the weekday morning. Learning and records stay licensed. The church never sits in those consoles.",
+    10: "Company, operator, capital. The operator owns the year and the close.",
+    11: "About −$125k at 60 ESA-only seats. Break-even near 96. Past 800 attendance, or you pay to find families.",
+    12: "Wrong category. The weekday school of record — not church software.",
+    13: "Ask: walk an empty Florida wing. Signed money. We take the close. Then sit a morning.",
   };
 
   const deck = document.getElementById("deck");
@@ -21,6 +22,7 @@
   const beatLabel = document.getElementById("beat-label");
   const dotsEl = document.getElementById("dots");
   const slides = [...document.querySelectorAll(".slide")];
+  const TOTAL = slides.length;
 
   let index = 1;
   let notesOn = false;
@@ -49,8 +51,12 @@
     current.removeAttribute("aria-hidden");
     index = next;
     deck.dataset.beat = String(index);
+    deck.classList.toggle("is-open", index === 1);
+    deck.classList.toggle("is-close", index === TOTAL);
+    deck.classList.toggle("is-fear", current.dataset.beat === "The refusal");
+    deck.classList.toggle("is-door", current.dataset.beat === "The door");
     beatLabel.textContent = current.dataset.beat || "";
-    notesBody.textContent = NOTES[index];
+    notesBody.textContent = NOTES[index] || "";
     notesEl.hidden = !notesOn;
     dotsEl.querySelectorAll("button").forEach((btn, i) => {
       btn.setAttribute("aria-current", i + 1 === index ? "true" : "false");
