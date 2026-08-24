@@ -61,8 +61,8 @@ body {
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
 }
 
-.deck[data-beat="1"],
-.deck[data-beat="11"] {
+.deck.is-open,
+.deck.is-close {
   background: var(--night);
   color: var(--paper);
 }
@@ -165,34 +165,34 @@ body {
   background: var(--brass);
 }
 
-.deck[data-beat="1"] .motif__hall,
-.deck[data-beat="1"] .motif__floor,
-.deck[data-beat="1"] .motif__window,
-.deck[data-beat="1"] .motif__shaft,
-.deck[data-beat="11"] .motif__hall,
-.deck[data-beat="11"] .motif__floor,
-.deck[data-beat="11"] .motif__window,
-.deck[data-beat="11"] .motif__shaft,
-.deck[data-beat="11"] .motif__door {
+.deck.is-open .motif__hall,
+.deck.is-open .motif__floor,
+.deck.is-open .motif__window,
+.deck.is-open .motif__shaft,
+.deck.is-close .motif__hall,
+.deck.is-close .motif__floor,
+.deck.is-close .motif__window,
+.deck.is-close .motif__shaft,
+.deck.is-close .motif__door {
   opacity: 1;
 }
 
-.deck[data-beat="11"] .motif__door {
+.deck.is-close .motif__door {
   transform: perspective(400px) rotateY(-22deg);
   transform-origin: left center;
   background: #2a2218;
 }
 
-.deck[data-beat="2"] .motif__door,
-.deck[data-beat="5"] .motif__door {
+.deck.is-fear .motif__door,
+.deck.is-door .motif__door {
   opacity: 0.9;
   right: 6%;
   border-color: rgba(22, 18, 14, 0.2);
   background: #2b241c;
 }
 
-.deck[data-beat="2"],
-.deck[data-beat="5"] {
+.deck.is-fear,
+.deck.is-door {
   background:
     linear-gradient(90deg, transparent 72%, rgba(154, 115, 64, 0.06)),
     var(--paper);
@@ -200,19 +200,19 @@ body {
 
 .mast {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 0.85rem 1.4rem 0;
+  padding: 0.85rem 1.4rem 0.55rem;
   font-size: 0.68rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--mute);
 }
 
-.deck[data-beat="1"] .mast,
-.deck[data-beat="11"] .mast {
+.deck.is-open .mast,
+.deck.is-close .mast {
   color: rgba(243, 236, 224, 0.48);
 }
 
@@ -232,22 +232,23 @@ body {
   outline: none;
   cursor: pointer;
   min-height: 0;
-  padding: 0.4rem 1.6rem 0.2rem;
+  overflow: hidden;
+  padding: 0.35rem 1.6rem 0.55rem;
 }
 
-.slide {
-  display: none;
+.slide,
+.slide.is-on[hidden] {
+  display: none !important;
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.slide.is-on:not([hidden]) {
+  display: grid !important;
   height: 100%;
   min-height: 0;
-  align-content: center;
-}
-
-.slide.is-on {
-  display: grid;
-}
-
-.slide[hidden] {
-  display: none !important;
+  align-content: safe center;
 }
 
 h1 {
@@ -275,10 +276,10 @@ h2 {
 .lede,
 .stand,
 .stack p,
-.quad p,
+.plan p,
 .trio p,
 .bands p,
-.houses p,
+.emap p,
 .build p,
 .shelf p {
   margin: 0;
@@ -313,16 +314,24 @@ h2 {
   font-size: clamp(1.9rem, 4vw, 3.1rem);
 }
 
-/* 01 hero */
+/* 01 hero — keep copy inside the stage, clear of mast and pager */
 
 .slide--hero {
-  gap: 1.15rem;
-  max-width: 20ch;
-  padding-bottom: 1rem;
+  gap: 0.7rem;
+  max-width: 24ch;
+  align-self: center;
+  padding: 0;
 }
 
 .slide--hero h1 {
-  max-width: 16ch;
+  max-width: none;
+  font-size: clamp(1.85rem, 4.1vw, 3.35rem);
+}
+
+.slide--hero .lede,
+.slide--hero .stand {
+  position: relative;
+  z-index: 1;
 }
 
 /* 02 refusal */
@@ -347,6 +356,19 @@ h2 {
 .stack p {
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   line-height: 1.35;
+}
+
+.fear {
+  display: grid;
+  gap: 0.25rem;
+  color: var(--ink);
+}
+
+.fear span {
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
 }
 
 /* 03 transfer */
@@ -390,30 +412,38 @@ h2 {
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
 }
 
-/* 04 four rooms */
+/* 04 floor plan */
 
-.quad {
+.plan {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border: 1px solid var(--rule);
+  grid-template-rows: auto auto auto;
+  border: 1px solid var(--ink);
 }
 
-.quad section {
-  padding: 1.05rem 1.15rem 1.15rem;
+.plan__room {
+  padding: 0.85rem 1rem 1rem;
   display: grid;
-  gap: 0.4rem;
+  gap: 0.3rem;
 }
 
-.quad section:nth-child(odd) {
+.plan__room:nth-child(odd) {
   border-right: 1px solid var(--rule);
 }
 
-.quad section:nth-child(-n + 2) {
-  border-bottom: 1px solid var(--rule);
+.plan__hall {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.35rem 1rem;
+  text-align: center;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.64rem;
+  color: var(--paper);
+  background: var(--ink);
 }
 
-.quad p,
+.plan p,
 .trio p,
 .bands p {
   color: var(--mute);
@@ -506,61 +536,99 @@ h2 {
   border-top: 2px solid var(--brass);
 }
 
-/* 08 three houses */
+/* 08 entity map */
 
-.houses {
+.emap {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
+  position: relative;
 }
 
-.houses section {
+.emap::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 0.95rem;
+  height: 1px;
+  background: var(--brass);
+}
+
+.emap li {
   display: grid;
-  gap: 0.35rem;
-  padding: 1.3rem 1.1rem 0.2rem;
-  border-top: 1px solid var(--ink);
+  gap: 0.25rem;
+  padding: 0 1.1rem 0.2rem;
+  position: relative;
 }
 
-.houses section + section {
-  padding-left: 1.3rem;
+.emap li::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--brass);
+  margin-bottom: 0.85rem;
+  box-shadow: 0 0 0 4px var(--paper);
 }
 
-.houses b {
-  margin-top: 1.1rem;
+.emap span {
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.emap b {
+  margin-top: 0.7rem;
   font-family: var(--display);
   font-size: 1.35rem;
   font-weight: 500;
 }
 
-.houses p {
+.emap p {
   color: var(--mute);
 }
 
-/* 09 ledger */
+/* 09 chart */
 
-.ledger {
+.chart {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 1.1rem;
   align-items: end;
-  min-height: 12rem;
+  min-height: 13rem;
+  position: relative;
+  padding-top: 0.4rem;
 }
 
-.ledger section {
+.chart__axis {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5.2rem;
+  border-bottom: 1px solid var(--ink);
+  pointer-events: none;
+}
+
+.chart section {
   display: grid;
   align-content: end;
   gap: 0.4rem;
-  min-height: 12rem;
+  min-height: 13rem;
 }
 
 .bar {
-  width: 100%;
+  width: 42%;
   height: var(--h);
-  background: linear-gradient(180deg, var(--brass), #6d4f28);
+  background: var(--ink);
   align-self: end;
 }
 
-.ledger strong {
+.chart strong {
   font-family: var(--display);
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 500;
@@ -568,7 +636,7 @@ h2 {
   line-height: 1;
 }
 
-.ledger span {
+.chart span {
   color: var(--mute);
   font-size: 0.92rem;
   max-width: 16ch;
@@ -577,28 +645,43 @@ h2 {
 
 /* 10 shelf */
 
-.stand--yes {
-  color: var(--ink);
-  font-size: clamp(1.15rem, 2vw, 1.4rem);
-  max-width: 28rem;
-}
-
 .shelf {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border-top: 1px solid var(--rule);
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.6rem;
+  align-items: stretch;
 }
 
-.shelf p {
-  padding: 0.85rem 1rem 0.85rem 0;
+.shelf__yes {
+  display: grid;
+  align-content: center;
+  gap: 0.55rem;
+  padding-right: 1.2rem;
+  border-right: 1px solid var(--ink);
+}
+
+.shelf__yes h1 {
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+}
+
+.shelf__yes p:last-child {
   color: var(--mute);
-  font-size: 1.12rem;
-  border-bottom: 1px solid var(--rule);
+  max-width: 26ch;
+  font-size: 1.1rem;
+  line-height: 1.35;
 }
 
-.shelf p:nth-child(even) {
-  padding-left: 1rem;
+.shelf__not {
+  display: grid;
+  align-content: center;
+}
+
+.shelf__not p {
+  margin: 0;
+  padding: 0.7rem 0;
+  color: var(--mute);
+  font-size: 1.08rem;
+  border-bottom: 1px solid var(--rule);
 }
 
 /* 11 ask */
@@ -610,12 +693,12 @@ h2 {
 
 .pager {
   position: relative;
-  z-index: 3;
+  z-index: 5;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.8rem;
-  padding: 0.45rem 1.15rem 0.7rem;
+  padding: 0.65rem 1.15rem 0.75rem;
 }
 
 .pager__step {
@@ -664,8 +747,8 @@ h2 {
   cursor: pointer;
 }
 
-.deck[data-beat="1"] .dots button,
-.deck[data-beat="11"] .dots button {
+.deck.is-open .dots button,
+.deck.is-close .dots button {
   background: #3a342c;
 }
 
@@ -720,9 +803,9 @@ h2 {
   .build,
   .trio,
   .bands,
-  .houses,
-  .quad,
-  .ledger,
+  .emap,
+  .plan,
+  .chart,
   .shelf {
     grid-template-columns: 1fr;
   }
@@ -735,35 +818,40 @@ h2 {
   .stack,
   .build__us,
   .trio section + section,
-  .houses section + section,
-  .shelf p:nth-child(even) {
+  .shelf__yes {
     padding-left: 0;
+    padding-right: 0;
     border-left: 0;
-  }
-
-  .quad section:nth-child(odd),
-  .quad section:nth-child(-n + 2) {
     border-right: 0;
   }
 
-  .quad section + section,
+  .plan__room:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .plan__room + .plan__room,
   .bands section,
-  .houses section,
+  .emap li,
   .trio section {
     border-top: 1px solid var(--rule);
     padding-top: 0.85rem;
+  }
+
+  .emap::before,
+  .chart__axis {
+    display: none;
   }
 
   .build__them {
     margin-top: 0.8rem;
   }
 
-  .ledger {
+  .chart {
     min-height: 0;
     gap: 1.2rem;
   }
 
-  .ledger section {
+  .chart section {
     min-height: 0;
     grid-template-columns: 3.5rem 1fr;
     align-items: center;
