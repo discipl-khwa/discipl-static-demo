@@ -299,8 +299,8 @@ h2 {
   line-height: 1.4;
 }
 
-.deck[data-beat="1"] .stand,
-.deck[data-beat="11"] .stand {
+.deck.is-open .stand,
+.deck.is-close .stand {
   color: rgba(243, 236, 224, 0.72);
 }
 
@@ -651,14 +651,16 @@ h2 {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 5.2rem;
+  /* Shared numeral row: two caption lines + numeral + gaps. */
+  bottom: 6.35rem;
   border-bottom: 1px solid var(--ink);
   pointer-events: none;
 }
 
 .chart section {
   display: grid;
-  align-content: end;
+  grid-template-rows: 1fr auto auto;
+  align-items: end;
   gap: 0.4rem;
   min-height: 13rem;
 }
@@ -676,6 +678,7 @@ h2 {
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1;
+  align-self: end;
 }
 
 .chart span {
@@ -683,6 +686,7 @@ h2 {
   font-size: 0.92rem;
   max-width: 16ch;
   line-height: 1.3;
+  min-height: calc(1.3em * 2);
 }
 
 /* 10 shelf */
@@ -731,6 +735,9 @@ h2 {
 .slide--ask {
   gap: 1.1rem;
   max-width: 18ch;
+  padding-bottom: 2.75rem;
+  box-sizing: border-box;
+  align-content: center;
 }
 
 .pager {
@@ -898,8 +905,17 @@ h2 {
 
   .chart section {
     min-height: 0;
+    grid-template-rows: none;
     grid-template-columns: 3.5rem 1fr;
     align-items: center;
+  }
+
+  .chart span {
+    min-height: 0;
+  }
+
+  .slide--ask {
+    padding-bottom: 1.25rem;
   }
 
   .bar {
