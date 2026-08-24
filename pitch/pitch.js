@@ -4,11 +4,11 @@
     1: "The pastor just hosts. We run the weekday school. No bill. Not Sunday software.",
     2: "Elder boards will not open on hope. An unsigned year is how a church gets hurt.",
     3: "The pastor just hosts. We take the year. Signed money, or the door stays shut.",
-    4: "Pastor glances. We run campus and morning. Family enrolls with no bill.",
-    5: "Three facts: no bill; signed money or the door stays shut; Florida first, Texas waits.",
+    4: "Host glance. School office. Family enrolls and never sees a bill. Morning is Formation.",
+    5: "Families never see a bill. The door opens only when the money is signed — gifts and instruments, not a handshake. Florida first. Texas waits.",
     6: "Build the weekday operating system. License academics. Church staff do not live in vendor consoles.",
-    7: "K–5 never logs in. 6–8 only if needed, and tightly. The church’s confession is theirs; we do not write it.",
-    8: "Company, operator, capital. Keep them apart so the year is not sold as software rent.",
+    7: "K–5 never logs in. 6–8 only if needed, and tightly. What this campus believes is theirs; we do not write it.",
+    8: "Company builds. Operator runs the year. Capital is signed gifts — not vibes.",
     9: "About −$125k at 60 ESA-only seats. Break-even near 96. Past 800 attendance, or you pay to find families.",
     10: "Wrong category on purpose. The shelf is the weekday school of record.",
     11: "Ask: walk an empty Florida wing, then sit a morning. One campus. Signed gifts. A door that stays shut until coverage is real.",
@@ -38,12 +38,16 @@
   function show(n) {
     const next = clamp(n);
     slides.forEach((slide) => {
-      const on = Number(slide.dataset.slide) === next;
-      slide.hidden = !on;
-      slide.classList.toggle("is-on", on);
+      slide.hidden = true;
+      slide.classList.remove("is-on");
+      slide.setAttribute("aria-hidden", "true");
     });
+    void stage.offsetHeight;
+    const current = slides[next - 1];
+    current.hidden = false;
+    current.classList.add("is-on");
+    current.removeAttribute("aria-hidden");
     index = next;
-    const current = slides[index - 1];
     deck.dataset.beat = String(index);
     beatLabel.textContent = current.dataset.beat || "";
     notesBody.textContent = NOTES[index];

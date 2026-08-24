@@ -19,7 +19,7 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Outfit:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./pitch.css?v=ac6aafe" />
+    <link rel="stylesheet" href="./pitch.css?v=uxpass" />
   </head>
   <body>
     <a class="skip" href="#stage">Skip to slides</a>
@@ -44,7 +44,7 @@
         <article class="slide slide--hero is-on" data-slide="1" data-beat="The wing">
           <p class="lede">Rooms sit empty, Monday through Friday.</p>
           <h1>The pastor just hosts.<br /><em>We run the weekday school.</em></h1>
-          <p class="stand">K–8. Weekdays — not Sunday. No bill.</p>
+          <p class="stand">K–8. Weekdays — not Sunday. Families never see a bill.</p>
         </article>
 
         <article class="slide slide--refuse" data-slide="2" data-beat="The refusal" hidden>
@@ -79,23 +79,24 @@
 
         <article class="slide slide--quad" data-slide="4" data-beat="Four rooms" hidden>
           <header class="slide__head">
-            <h1>Four rooms. One school.</h1>
-            <p class="stand">The pastor just hosts. He does not live in the other three.</p>
+            <h1>How a weekday works.</h1>
+            <p class="stand">Host glance on one side. School office on the other. Families never see a bill.</p>
           </header>
-          <div class="quad">
-            <section>
-              <h2>Church</h2>
-              <p>The pastor just hosts. A glance. A way out.</p>
+          <div class="plan" role="img" aria-label="A wing with four rooms: host glance, school office, family, and morning.">
+            <section class="plan__room">
+              <h2>Host glance</h2>
+              <p>The pastor looks in. Rooms. A way out.</p>
             </section>
-            <section>
-              <h2>Campus</h2>
-              <p>The year, the staff, the door, the children.</p>
+            <section class="plan__room">
+              <h2>School office</h2>
+              <p>We run the year — staff, the door, the children.</p>
             </section>
-            <section>
+            <p class="plan__hall">The weekday hall</p>
+            <section class="plan__room">
               <h2>Family</h2>
-              <p>Enroll. No bill.</p>
+              <p>Enroll. Families never see a bill.</p>
             </section>
-            <section>
+            <section class="plan__room">
               <h2>Morning</h2>
               <p>Formation — the weekday itself. Not a content store.</p>
             </section>
@@ -109,11 +110,11 @@
           <div class="trio">
             <section>
               <h2>The family</h2>
-              <p>No bill.</p>
+              <p>Families never see a bill.</p>
             </section>
             <section>
               <h2>The door</h2>
-              <p>Signed money, or the door stays shut. A handshake is not a gift.</p>
+              <p>The door opens only when the money is signed. Signed gifts and instruments — not a handshake.</p>
             </section>
             <section>
               <h2>The map</h2>
@@ -151,8 +152,8 @@
               <p>A login only if needed — small, watched, easy to take away.</p>
             </section>
             <section>
-              <h2>The church</h2>
-              <p>Their confession shepherds the weekday. We do not write it.</p>
+              <h2>This campus</h2>
+              <p>What this campus believes shepherds the weekday. We do not write it.</p>
             </section>
           </div>
         </article>
@@ -160,32 +161,37 @@
         <article class="slide slide--houses" data-slide="8" data-beat="Three houses" hidden>
           <header class="slide__head">
             <h1>Three houses, on purpose.</h1>
+            <p class="stand">Three names, because the year is real.</p>
           </header>
-          <div class="houses">
-            <section>
+          <ol class="emap">
+            <li>
+              <span>Builds</span>
               <h2>Company</h2>
               <p>The product.</p>
               <b>C-Corp</b>
-            </section>
-            <section>
+            </li>
+            <li>
+              <span>Runs</span>
               <h2>Operator</h2>
               <p>The campus year.</p>
               <b>501(c)(3)</b>
-            </section>
-            <section>
+            </li>
+            <li>
+              <span>Covers</span>
               <h2>Capital</h2>
-              <p>Coverage for the year.</p>
+              <p>Signed gifts for the year.</p>
               <b>The vehicle</b>
-            </section>
-          </div>
+            </li>
+          </ol>
         </article>
 
         <article class="slide slide--ledger" data-slide="9" data-beat="The ledger" hidden>
           <header class="slide__head">
             <h1>The year, in three numbers.</h1>
-            <p class="stand">Honest campus math. Florida first.</p>
+            <p class="stand">Florida first. Signed money — not vibes.</p>
           </header>
-          <div class="ledger" role="img" aria-label="Sixty seats lose about one hundred twenty-five thousand dollars. Break-even near ninety-six. Eight hundred or more attendance, or you pay to find families.">
+          <div class="chart" role="img" aria-label="Sixty seats lose about one hundred twenty-five thousand dollars. Break-even near ninety-six. Eight hundred or more attendance, or you pay to find families.">
+            <div class="chart__axis" aria-hidden="true"></div>
             <section>
               <div class="bar" style="--h: 28%"></div>
               <strong>−$125k</strong>
@@ -194,7 +200,7 @@
             <section>
               <div class="bar" style="--h: 52%"></div>
               <strong>~96</strong>
-              <span>The floor. Even.</span>
+              <span>Even. The floor.</span>
             </section>
             <section>
               <div class="bar" style="--h: 88%"></div>
@@ -205,22 +211,25 @@
         </article>
 
         <article class="slide slide--shelf" data-slide="10" data-beat="The shelf" hidden>
-          <header class="slide__head">
-            <h1>Wrong shelf.</h1>
-            <p class="stand stand--yes">The pastor just hosts. We run the weekday school.</p>
-          </header>
           <div class="shelf">
-            <p>Not Planning Center</p>
-            <p>Not Sunday check-in</p>
-            <p>Not a church classroom tool</p>
-            <p>Not family billing</p>
+            <section class="shelf__yes">
+              <p class="eyebrow">This shelf</p>
+              <h1>The weekday school.</h1>
+              <p>The pastor just hosts. We run it. Families never see a bill.</p>
+            </section>
+            <div class="shelf__not">
+              <p>Not Planning Center</p>
+              <p>Not Sunday check-in</p>
+              <p>Not a church classroom tool</p>
+              <p>Not family billing</p>
+            </div>
           </div>
         </article>
 
         <article class="slide slide--ask" data-slide="11" data-beat="The walk" hidden>
-          <p class="lede">Florida. One campus. Signed money, or the door stays shut.</p>
+          <p class="lede">Florida. One campus. The door opens only when the money is signed.</p>
           <h1>Walk the empty wing with us.</h1>
-          <p class="stand">Then sit a weekday morning. No bill.</p>
+          <p class="stand">Then sit a weekday morning. Families never see a bill.</p>
         </article>
       </main>
 
@@ -237,6 +246,6 @@
     </div>
 
     <p class="hint">Arrows or space · click · N notes</p>
-    <script src="./pitch.js?v=ac6aafe" defer></script>
+    <script src="./pitch.js?v=uxpass" defer></script>
   </body>
 </html>
