@@ -14,7 +14,11 @@
     "STORY BEAT",
     "Surface split",
     "Buy the LMS",
+    "Sunday parked",
+    "SoF-as-code",
     "Host portal",
+    "mock-log",
+    "Mock log",
     "coverage_short",
     "escrow_incomplete",
     "facility_unsigned",
@@ -388,7 +392,7 @@
                   ? btn("Open the campus", "open")
                   : ""
               }
-              ${btn("Count a verbal pledge", "soft", "btn--paper")}
+              ${open ? "" : btn("Count a verbal pledge", "soft", "btn--paper")}
             </div>
             ${
               clear && !open
@@ -479,7 +483,7 @@
         <div class="grid grid-2">
           <section class="card">
             <h2>Today</h2>
-            <div class="goal"><b>1</b><div><strong>Morning liturgy</strong><p>A short gathered beginning. Practiced with ${escapeHtml(seed.guide)} or a parent.</p></div></div>
+            <div class="goal is-now"><b>1</b><div><strong>Morning liturgy</strong><p>A short gathered beginning. Practiced with ${escapeHtml(seed.guide)} or a parent.</p></div></div>
             <div class="goal"><b>2</b><div><strong>Formation hour</strong><p>Jesus-rooted practice. The campus keeps this close.</p></div></div>
             <div class="goal"><b>3</b><div><strong>Licensed math</strong><p>Numbers open in a tool Discipl does not have to build.</p></div></div>
           </section>
