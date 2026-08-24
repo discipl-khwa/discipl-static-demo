@@ -44,7 +44,7 @@
     title: (firstName) => `${firstName}'s day`,
     goalsTitle: "Goals",
     goalsHint:
-      "Stub list so the walkthrough can show formation targets. Not a live goal engine.",
+      "Today's pathway — one clear next step, then the rest of the day.",
     tutorTitle: "Formation coach",
     tutorBound: (version) =>
       `Stays inside what this campus believes (${version}). Won't invent doctrine.`,
@@ -531,8 +531,8 @@
     const state = readState();
     const step = walkProgress(state);
     const beats = [
-      ["1", "#/host", "Daniel", "Host the wing", STORY_BEATS.host, "Investor takeaway: church is landlord, not school operator."],
-      ["2", "#/ops", "Camille", "Open only when real", STORY_BEATS.director, "Investor takeaway: capital gates, not vibes."],
+      ["1", "#/host", "Daniel", "Host glance", STORY_BEATS.host, "Investor takeaway: church is landlord, not school operator."],
+      ["2", "#/ops", "Camille", "Before the campus can open", STORY_BEATS.director, "Investor takeaway: capital gates, not vibes."],
       ["3", "#/family/enroll", "Naomi", "Naomi enrolls free", STORY_BEATS.family, "Investor takeaway: parents never see a bill."],
       ["4", "#/student", "Eli", "Preview with a parent or guide", STORY_BEATS.formation, "Investor takeaway: we own formation; we license academics."],
     ];
@@ -999,15 +999,15 @@
         <div class="note-dash" role="note">${escapeHtml(FORMATION_COPY.chrome)} Walked with ${escapeHtml(preview.walkedWith)}.</div>
         ${pageHeader(FORMATION_COPY.eyebrow, FORMATION_COPY.title(preview.learnerFirstName), `${preview.campusName} · ${preview.gradeBand} · mentor ${preview.mentorName} · ${preview.dateLabel}`)}
         <section class="card card--hero">
-          <p class="eyebrow">Today</p>
-          <h2 class="card-title">Today's goal</h2>
+          <p class="eyebrow">Next step</p>
+          <h2 class="card-title">Today's focus</h2>
           <p style="font-size:1.25rem;font-weight:700;margin:.55rem 0 0">${escapeHtml(today.title)}</p>
           <p class="hint">${escapeHtml(today.note)}</p>
+          <p class="hint" style="margin-top:.7rem;color:#0f766e;font-weight:600">Do this first with your parent or guide. Then continue the pathway below.</p>
         </section>
         <section class="card">
           <div class="row-between">
-            <h2 class="card-title">${escapeHtml(FORMATION_COPY.goalsTitle)}</h2>
-            ${badge(FORMATION_COPY.stubLabel, "demo")}
+            <h2 class="card-title">Pathway</h2>
           </div>
           <p class="hint">${escapeHtml(FORMATION_COPY.goalsHint)}</p>
           <ol class="list">
@@ -1028,12 +1028,11 @@
         <section class="card">
           <h2 class="card-title">Guide check-in</h2>
           <p>${escapeHtml(FORMATION_COPY.checkin)}</p>
-          <p class="hint">Campus-scoped. The host pastor does not see this roster. A K–5 child does not log in.</p>
+          <p class="hint">Only this campus's guide sees this. Younger kids do not log in alone.</p>
         </section>
         <section class="card">
           <div class="row-between">
             <h2 class="card-title">${escapeHtml(FORMATION_COPY.reflectCta)}</h2>
-            ${badge(DEMO_LABEL, "demo")}
           </div>
           <p class="hint">A few words is enough. Preview stub — walked with a parent or guide. No child login.</p>
           <label class="field-label">
@@ -1053,7 +1052,7 @@
           ${
             ui.tutorRevealed
               ? `<div class="stack" style="margin-top:1rem">
-                  <p class="bubble">I'm bound to ${escapeHtml(FORMATION_COPY.sofBound)}. I can help with today's formation goal.</p>
+                  <p class="bubble">I stay inside ${escapeHtml(FORMATION_COPY.sofBound)}. I can help with today's formation goal.</p>
                   <p class="tile">Learner (fixture): Which denomination should I pick?</p>
                   <p class="bubble">${escapeHtml(FORMATION_COPY.refuse)}</p>
                 </div>`
@@ -1064,13 +1063,11 @@
             <textarea placeholder="${escapeHtml(FORMATION_COPY.tutorPlaceholder)}" disabled readonly></textarea>
           </label>
           <p class="hint">${escapeHtml(preview.tutor.note)}</p>
-          <p class="hint">Mock log: coach_fixture · ${SEED.campus.id} · sof_bound_reply. No learner names.</p>
           <div class="btn-row">${btn(ui.tutorRevealed ? "Hide refuse sample" : "Show refuse sample", 'data-action="tutor"', "secondary")}</div>
         </section>
         <section class="card" id="licensed-academics">
           <div class="row-between">
             <h2 class="card-title">${escapeHtml(HANDOFF_COPY.title)}</h2>
-            ${badge(DEMO_LABEL, "demo")}
           </div>
           <p>${escapeHtml(HANDOFF_COPY.body)}</p>
           <p class="hint">${escapeHtml(FORMATION_COPY.academicsHint)}</p>
