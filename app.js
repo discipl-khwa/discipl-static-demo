@@ -148,7 +148,7 @@
   function btn(label, action, extra = "", opts = {}) {
     const off = Boolean(opts.disabled);
     const cls = ["btn", extra, off ? "is-off" : ""].filter(Boolean).join(" ");
-    const gate = off ? ' disabled aria-disabled="true"' : "";
+    const gate = off ? ' aria-disabled="true"' : "";
     return `<button type="button" class="${cls}" data-action="${action}"${gate}>${label}</button>`;
   }
 
@@ -156,14 +156,14 @@
     const path = typeof event.composedPath === "function" ? event.composedPath() : [];
     for (const node of path) {
       if (node instanceof Element && node.hasAttribute("data-action")) {
-        if (node.disabled || node.getAttribute("aria-disabled") === "true") return null;
+        if (node.disabled) return null;
         return node.getAttribute("data-action");
       }
     }
     let el = event.target;
     if (!(el instanceof Element)) el = el && el.parentElement;
     const target = el && el.closest("[data-action]");
-    if (!target || target.disabled || target.getAttribute("aria-disabled") === "true") return null;
+    if (!target || target.disabled) return null;
     return target.getAttribute("data-action");
   }
 
@@ -177,7 +177,7 @@
     const affirm = document.querySelector('[data-action="naomi-believe"]');
     if (!box || !affirm) return;
     const on = box.checked;
-    affirm.disabled = !on;
+    affirm.disabled = false;
     affirm.classList.toggle("is-off", !on);
     if (on) affirm.removeAttribute("aria-disabled");
     else affirm.setAttribute("aria-disabled", "true");
