@@ -3,7 +3,7 @@
     1: "The pastor just hosts. We run the weekday school. Families never see a bill.",
     2: "Problem only. The last line is elder fear — not our model. They will not open on hope.",
     3: "Wind-down on the face: families and church share notice. Church does not inherit a school office. We take the close.",
-    4: "Who does what on Monday: pastor glances, no kids’ names. Director won’t open until signed money, deposit, and safety are real. Parent enrolls, never a bill, says yes to what this church believes. Morning is formation we own; math is a licensed trip; younger kids don’t get an account.",
+    4: "Two jobs, not one Monday. Open: signed money, deposit before hire, facility and a clean close, families and staff say yes to what this church believes. Soft pledges don’t open. Run: safety and screening we run, formation we own, licensed math out and back + Return — goal → reflection → licensed trip → Return. Younger kids don’t get an account. Parent never a bill. The pastor hosts — glance / way out. Not the opener. Not the runner.",
     5: "Deposit money sits before we hire or build. Signed money, or the door stays shut.",
     6: "Fingerprints, screening, child-safety, compliance — we run it every week. Not a volunteer chore.",
     7: "Families and staff say yes to what this church believes before the weekday starts. We don’t write the confession. Still required — not a form we invent.",
