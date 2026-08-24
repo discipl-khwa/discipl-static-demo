@@ -1026,3 +1026,36 @@ details.coverage summary::-webkit-details-marker {
     --line: #78716c;
   }
 }
+
+
+.progress {
+  margin-top: 1rem;
+  height: 8px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+.progress__bar {
+  height: 100%;
+  background: linear-gradient(90deg, #0f766e, #14b8a6);
+  border-radius: 999px;
+  transition: width .35s ease;
+}
+.vc-why {
+  margin: .45rem 0 0;
+  font-size: .78rem;
+  line-height: 1.35;
+  color: #0f766e;
+  font-weight: 600;
+}
+.vc-card.is-next {
+  outline: 2px solid #0f766e;
+  box-shadow: 0 10px 30px rgba(15, 118, 110, 0.12);
+}
+.vc-card.is-done {
+  opacity: 0.78;
+}
+.vc-card.is-done .vc-num {
+  background: #0f766e;
+  color: #fff;
+}

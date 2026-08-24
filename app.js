@@ -517,46 +517,58 @@
       }`;
   }
 
+  function walkProgress(state) {
+    let n = 0;
+    if (state.operatorApproved && state.facilitySigned && state.windDownSigned) n = 1;
+    if (state.campusStatus === "open") n = 2;
+    if (state.familyEnrolled) n = 3;
+    // Eli is always visit-based; count 4 only after family enrolled (end of script)
+    if (state.familyEnrolled) n = 4;
+    return n;
+  }
+
   function renderHub() {
     const state = readState();
+    const step = walkProgress(state);
+    const beats = [
+      ["1", "#/host", "Daniel", "Host the wing", STORY_BEATS.host, "Investor takeaway: church is landlord, not school operator."],
+      ["2", "#/ops", "Camille", "Open only when real", STORY_BEATS.director, "Investor takeaway: capital gates, not vibes."],
+      ["3", "#/family/enroll", "Naomi", "Naomi enrolls free", STORY_BEATS.family, "Investor takeaway: parents never see a bill."],
+      ["4", "#/student", "Eli", "Preview with a parent or guide", STORY_BEATS.formation, "Investor takeaway: we own formation; we license academics."],
+    ];
     return `
       <div class="panel">
-        <p class="hub-kicker">${badge(DEMO_LABEL, "demo")} 5-minute walk</p>
-        <h1>Daniel → Camille → Naomi → Eli</h1>
+        <p class="hub-kicker">${badge(DEMO_LABEL, "demo")} Seed walk · ${step}/4</p>
+        <h1>Empty wing → weekday school</h1>
         <p class="lede">${escapeHtml(HOME_COPY.blurb)}</p>
+        <div class="progress" aria-label="Walk progress">
+          <div class="progress__bar" style="width:${(step / 4) * 100}%"></div>
+        </div>
+        <p class="hint" style="margin-top:.55rem">Follow Daniel → Camille → Naomi → Eli once. Reset anytime.</p>
         <div class="btn-row">
-          ${btn("Reset demo", 'data-action="reset"', "lg")}
-          ${linkBtn("Start with Daniel", "#/host", "secondary lg")}
+          ${linkBtn(step === 0 ? "Start with Daniel" : "Continue the walk", step === 0 ? "#/host" : step === 1 ? "#/ops" : step === 2 ? "#/family/enroll" : "#/student", "lg")}
+          ${btn("Reset demo", 'data-action="reset"', "secondary lg")}
         </div>
         <div class="hub-grid" style="margin-top:1.5rem">
           <section class="card card--hero script">
-            <p class="eyebrow">Walk this</p>
-            <h2 class="card-title">One honest script</h2>
-            <p class="hint">Reset restores unsigned Daniel defaults. Camille starts blocked. Naomi is not enrolled.</p>
+            <p class="eyebrow">What you must feel in 5 minutes</p>
+            <h2 class="card-title">Four beats. One thesis.</h2>
             <ol>
-              <li><strong>Daniel</strong> — ${escapeHtml(STORY_BEATS.host)}</li>
-              <li><strong>Camille</strong> — ${escapeHtml(STORY_BEATS.director)}</li>
-              <li><strong>Naomi</strong> — ${escapeHtml(STORY_BEATS.family)}</li>
-              <li><strong>Eli</strong> — ${escapeHtml(STORY_BEATS.formation)}</li>
+              ${beats.map(([, , who, , line]) => `<li><strong>${escapeHtml(who)}</strong> — ${escapeHtml(line)}</li>`).join("")}
             </ol>
-            <p class="hint">Campus is ${escapeHtml(statusLabel(state.campusStatus).toLowerCase())}. Operator ${state.operatorApproved ? "approved" : "unsigned"}. Facility ${state.facilitySigned && state.windDownSigned ? "signed" : "unsigned"}.</p>
           </section>
           <section>
             <ol class="vc-path" style="margin:0;padding:0;list-style:none">
-              ${[
-                ["1", "#/host", "Daniel", "Host glance", "You host the wing. You are not the school operator."],
-                ["2", "#/ops", "Camille", "Open-gate", "Blockers first. Soft interest cannot green the gate."],
-                ["3", "#/family/enroll", "Naomi", "Naomi enrolls free", "Scholarship is the payment. Parents never see a bill."],
-                ["4", "#/student", "Eli", "Preview with a parent or guide", FORMATION_COPY.accepted],
-              ]
+              ${beats
                 .map(
-                  ([n, href, who, label, hint]) => `
+                  ([n, href, who, label, hint, why], i) => `
                 <li>
-                  <a class="vc-card" href="${href}">
+                  <a class="vc-card ${Number(n) <= step ? "is-done" : Number(n) === step + 1 ? "is-next" : ""}" href="${href}">
                     <span class="vc-num">${n}</span>
                     <p class="vc-who">${escapeHtml(who)}</p>
                     <p class="vc-label">${escapeHtml(label)}</p>
                     <p class="vc-hint">${escapeHtml(hint)}</p>
+                    <p class="vc-why">${escapeHtml(why)}</p>
                   </a>
                 </li>`,
                 )
@@ -564,15 +576,6 @@
             </ol>
           </section>
         </div>
-        <section class="card split">
-          <h2 class="card-title">Surface split (locked)</h2>
-          <ul>
-            <li>Host (${escapeHtml(SEED.campus.hostName)}, fictional) sees aggregates only — no child roster, no enrollment editor, no campus funding list editor.</li>
-            <li>Ops owns enrollment, coverage gates, campus beliefs, escrow, Florida pack, and audit.</li>
-            <li>Families enroll free — no sponsor prompts. If cover is short, the campus owns the gap.</li>
-            <li>Sunday check-in is parked. This prototype does not expand it.</li>
-          </ul>
-        </section>
       </div>`;
   }
 
@@ -761,7 +764,7 @@
         ${storyBeat(STORY_BEATS.director)}
         ${pageHeader("Ops · Campus director", "Open-gate", "Blockers first. Each conjunct is pass or blocked with a reason — never one vague green.")}
         <section class="card card--hero">
-          <h2 class="card-title">beat — denied → signed commitment → open</h2>
+          <h2 class="card-title">The gate — denied → signed commitment → open</h2>
           <p class="hint">In-demo recovery. Soft interest still does not count. One click adds the fixture signed gift and completes escrow so Open can succeed.</p>
           <ol class="script" style="padding-left:1.15rem">
             <li style="${!gate.canOpen && !open ? "font-weight:650" : "color:var(--muted)"}">1. Denied — coverage short until a signed instrument lands.</li>
