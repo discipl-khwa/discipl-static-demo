@@ -1,11 +1,11 @@
 (() => {
   const TOTAL = 11;
   const NOTES = {
-    1: "Church-hosted K–8 weekday school of record. Not Sunday software. Families never see a bill.",
-    2: "The refusal is fiduciary. Empty rooms plus an unsigned year is how a host gets hurt.",
-    3: "Host keeps the building. We carry the year. The door opens only when the money is signed.",
-    4: "Church glance. Campus year. Family enrolls without a bill. Morning is Formation — not a content store.",
-    5: "Three separate facts: no family bill; signed gifts and instruments only; Florida first, Texas waits.",
+    1: "The pastor just hosts. We run the weekday school. No bill. Not Sunday software.",
+    2: "Elder boards will not open on hope. An unsigned year is how a church gets hurt.",
+    3: "The pastor just hosts. We take the year. Signed money, or the door stays shut.",
+    4: "Pastor glances. We run campus and morning. Family enrolls with no bill.",
+    5: "Three facts: no bill; signed money or the door stays shut; Florida first, Texas waits.",
     6: "Build the weekday operating system. License academics. Church staff do not live in vendor consoles.",
     7: "K–5 never logs in. 6–8 only if needed, and tightly. The church’s confession is theirs; we do not write it.",
     8: "Company, operator, capital. Keep them apart so the year is not sold as software rent.",
