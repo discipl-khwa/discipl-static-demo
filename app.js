@@ -101,7 +101,7 @@
 
   function patch(partial) {
     save({ ...load(), ...partial });
-    draw();
+    scheduleDraw();
   }
 
   function money(n) {
@@ -145,8 +145,48 @@
       .replaceAll('"', "&quot;");
   }
 
-  function btn(label, action, extra = "") {
-    return `<button type="button" class="btn ${extra}" data-action="${action}">${label}</button>`;
+  function btn(label, action, extra = "", opts = {}) {
+    const off = Boolean(opts.disabled);
+    const cls = ["btn", extra, off ? "is-off" : ""].filter(Boolean).join(" ");
+    const aria = off ? ' aria-disabled="true"' : "";
+    return `<button type="button" class="${cls}" data-action="${action}"${aria}>${label}</button>`;
+  }
+
+  function actionFromEvent(event) {
+    const path = typeof event.composedPath === "function" ? event.composedPath() : [];
+    for (const node of path) {
+      if (node instanceof Element && node.hasAttribute("data-action")) {
+        return node.getAttribute("data-action");
+      }
+    }
+    let el = event.target;
+    if (!(el instanceof Element)) el = el && el.parentElement;
+    const target = el && el.closest("[data-action]");
+    return target ? target.getAttribute("data-action") : null;
+  }
+
+  function beliefBoxChecked() {
+    const box = document.querySelector('input[data-belief="read"]');
+    return Boolean(box && box.checked);
+  }
+
+  function syncAffirmGate() {
+    const box = document.querySelector('input[data-belief="read"]');
+    const affirm = document.querySelector('[data-action="naomi-believe"]');
+    if (!box || !affirm) return;
+    const on = box.checked;
+    affirm.classList.toggle("is-off", !on);
+    if (on) affirm.removeAttribute("aria-disabled");
+    else affirm.setAttribute("aria-disabled", "true");
+  }
+
+  let drawSoon = 0;
+  function scheduleDraw() {
+    if (drawSoon) return;
+    drawSoon = requestAnimationFrame(() => {
+      drawSoon = 0;
+      draw();
+    });
   }
 
   function flash(message) {
@@ -369,7 +409,7 @@
             <p class="door__word">${open ? "Open." : "Not yet."}</p>
           </div>
           <section class="card">
-            <h2>${open ? "What cleared" : "What is still short"}</h2>
+            <h2>${blocked.length ? "What is still short" : "What cleared"}</h2>
             ${
               blocked.length
                 ? `<ul class="reasons">${blocked
@@ -440,7 +480,7 @@
         </label>
         <div class="row">
           ${btn("Back", "naomi-back", "btn--paper")}
-          ${btn("I affirm these beliefs", "naomi-believe")}
+          ${btn("I affirm these beliefs", "naomi-believe", "", { disabled: !world.beliefsAffirmed })}
         </div>`;
     } else if (step === 3) {
       body = `
@@ -610,6 +650,10 @@
     if (name === "naomi-next") return patch({ naomiStep: Math.min(4, world.naomiStep + 1) });
     if (name === "naomi-back") return patch({ naomiStep: Math.max(0, world.naomiStep - 1) });
     if (name === "naomi-believe") {
+      if (!beliefBoxChecked()) {
+        flash("Check that you have read and affirm these beliefs.");
+        return;
+      }
       return patch({ beliefsAffirmed: true, naomiStep: 3 });
     }
     if (name === "naomi-aid") {
@@ -664,6 +708,10 @@
   }
 
   function draw() {
+    if (drawSoon) {
+      cancelAnimationFrame(drawSoon);
+      drawSoon = 0;
+    }
     const world = load();
     const root = document.getElementById("app");
     const showReset = world.beat !== "title";
@@ -680,23 +728,52 @@
     root.innerHTML = html;
   }
 
-  document.addEventListener("click", (event) => {
-    const target = event.target.closest("[data-action]");
-    if (!target) return;
-    event.preventDefault();
-    const name = target.getAttribute("data-action");
-    if (name === "begin") return beginTape();
+  let armedAction = null;
+
+  function runAction(name, event) {
+    if (!name) return false;
+    if (event) event.preventDefault();
+    if (name === "begin") {
+      beginTape();
+      return true;
+    }
     if (name === "to-title") {
       goBeat("title");
-      return;
+      return true;
     }
     onAction(name);
+    return true;
+  }
+
+  document.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return;
+    const name = actionFromEvent(event);
+    armedAction = name
+      ? { name, pointerId: event.pointerId, x: event.clientX, y: event.clientY }
+      : null;
+  });
+
+  document.addEventListener("pointerup", (event) => {
+    if (!armedAction || armedAction.pointerId !== event.pointerId) return;
+    const name = armedAction.name;
+    const dx = event.clientX - armedAction.x;
+    const dy = event.clientY - armedAction.y;
+    const still = actionFromEvent(event);
+    armedAction = null;
+    if (still) return;
+    if (dx * dx + dy * dy > 100) return;
+    runAction(name, event);
+  });
+
+  document.addEventListener("click", (event) => {
+    runAction(actionFromEvent(event), event);
   });
 
   document.addEventListener("change", (event) => {
-    const box = event.target.closest("[data-belief]");
+    const el = event.target instanceof Element ? event.target : event.target && event.target.parentElement;
+    const box = el && el.closest("[data-belief]");
     if (!box) return;
-    if (box.checked) patch({ beliefsAffirmed: true });
+    syncAffirmGate();
   });
 
   draw();

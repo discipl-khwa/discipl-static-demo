@@ -495,7 +495,9 @@ h1 {
   box-shadow: 0 10px 24px rgba(15, 118, 110, 0.22);
 }
 
-.btn:disabled {
+.btn:disabled,
+.btn.is-off,
+.btn[aria-disabled="true"] {
   opacity: 0.42;
   cursor: not-allowed;
   transform: none;
