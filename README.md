@@ -1,9 +1,7 @@
-# Discipl static friend-share demo
+# The Empty Wing
 
-Throwaway HTML/CSS/JS walkthrough for sharing with a friend.
+A linear friend walk of Discipl: empty wing → pastor glance → honest open → a mother enrolls with no bill → a formation morning.
 
 **Live:** https://discipl-khwa.github.io/discipl-static-demo/
 
-Not the ADR Next.js + Auth.js product (`discipl-khwa/discipl`). Friend-voice copy only.
-
-Walk: Daniel (host church) → Camille (ops) → Naomi (family, free) → Eli (formation preview).
+Standalone HTML, CSS, and JS for GitHub Pages. Not the Next.js product app.
