@@ -6,10 +6,10 @@ A linear friend walk of Discipl: empty wing → pastor glance → honest open �
 
 Standalone HTML, CSS, and JS for GitHub Pages. Not the Next.js product app.
 
-## Draft pitch (separate route)
+## Pitch (separate route)
 
-YC-bar throwaway slide walk. Empty Wing is untouched.
+Slide walk. Empty Wing is untouched.
 
 **Live:** https://discipl-khwa.github.io/discipl-static-demo/pitch/
 
-Draft watermark. Not investor-final until Kevin signs SoF, funders, and numbers. Keyboard ←/→ and space; click/tap; `N` for notes.
+Keyboard ←/→ and space; click/tap; `N` for notes.
