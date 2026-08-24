@@ -148,21 +148,23 @@
   function btn(label, action, extra = "", opts = {}) {
     const off = Boolean(opts.disabled);
     const cls = ["btn", extra, off ? "is-off" : ""].filter(Boolean).join(" ");
-    const aria = off ? ' aria-disabled="true"' : "";
-    return `<button type="button" class="${cls}" data-action="${action}"${aria}>${label}</button>`;
+    const gate = off ? ' disabled aria-disabled="true"' : "";
+    return `<button type="button" class="${cls}" data-action="${action}"${gate}>${label}</button>`;
   }
 
   function actionFromEvent(event) {
     const path = typeof event.composedPath === "function" ? event.composedPath() : [];
     for (const node of path) {
       if (node instanceof Element && node.hasAttribute("data-action")) {
+        if (node.disabled || node.getAttribute("aria-disabled") === "true") return null;
         return node.getAttribute("data-action");
       }
     }
     let el = event.target;
     if (!(el instanceof Element)) el = el && el.parentElement;
     const target = el && el.closest("[data-action]");
-    return target ? target.getAttribute("data-action") : null;
+    if (!target || target.disabled || target.getAttribute("aria-disabled") === "true") return null;
+    return target.getAttribute("data-action");
   }
 
   function beliefBoxChecked() {
@@ -175,6 +177,7 @@
     const affirm = document.querySelector('[data-action="naomi-believe"]');
     if (!box || !affirm) return;
     const on = box.checked;
+    affirm.disabled = !on;
     affirm.classList.toggle("is-off", !on);
     if (on) affirm.removeAttribute("aria-disabled");
     else affirm.setAttribute("aria-disabled", "true");
