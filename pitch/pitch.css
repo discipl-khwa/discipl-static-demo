@@ -300,7 +300,12 @@ h2 {
 
 .deck.is-open .stand,
 .deck.is-close .stand {
-  color: rgba(243, 236, 224, 0.72);
+  color: #d8d2c6;
+}
+
+.deck.is-open .lede,
+.deck.is-close .lede {
+  color: #e0b56a;
 }
 
 .slide__head {
@@ -325,13 +330,13 @@ h2 {
 
 .slide--hero {
   gap: 0.7rem;
-  max-width: 24ch;
+  max-width: 34rem;
   align-self: center;
   padding: 0;
 }
 
 .slide--hero h1 {
-  max-width: none;
+  max-width: 16em;
   font-size: clamp(1.85rem, 4.1vw, 3.35rem);
 }
 
@@ -813,22 +818,24 @@ h2 {
 /* 11 ask */
 
 .slide--ask {
-  gap: 0.8rem;
-  max-width: 20ch;
-  padding-top: 0.2rem;
-  padding-bottom: 4.75rem;
+  gap: 0.7rem;
+  max-width: 28rem;
+  padding-top: 0.45rem;
+  padding-bottom: 4.5rem;
   box-sizing: border-box;
   align-content: start;
   align-self: stretch;
 }
 
 .slide--ask h1 {
-  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  max-width: 11em;
+  font-size: clamp(2.1rem, 3.8vw, 3.15rem);
 }
 
 .slide--ask .stand {
   position: relative;
   z-index: 2;
+  max-width: 26rem;
 }
 
 .pager {
@@ -860,6 +867,12 @@ h2 {
   opacity: 1;
 }
 
+.deck.is-open .pager__step,
+.deck.is-close .pager__step {
+  color: #e8e0d4;
+  opacity: 0.92;
+}
+
 .dots {
   display: flex;
   justify-content: center;
@@ -889,12 +902,17 @@ h2 {
 
 .deck.is-open .dots button,
 .deck.is-close .dots button {
-  background: #3a342c;
+  background: #b7ae9f;
 }
 
 .dots button[aria-current="true"] {
   background: var(--brass);
   transform: scale(1.25);
+}
+
+.deck.is-open .dots button[aria-current="true"],
+.deck.is-close .dots button[aria-current="true"] {
+  background: #f0c27a;
 }
 
 .notes {
