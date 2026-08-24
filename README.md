@@ -1,0 +1,1 @@
+This folder is a friend-share fixture: a standalone HTML/CSS/JS walkthrough of the Discipl VC path (Daniel → Camille → Naomi → Eli). It is not production, not the Next.js app, and not the ADR-0001 stack. Open `index.html` locally or via GitHub Pages; demo state lives in `sessionStorage` and Reset restores unsigned Daniel defaults.
