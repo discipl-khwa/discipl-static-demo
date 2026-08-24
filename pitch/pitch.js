@@ -7,12 +7,12 @@
     5: "Deposit money sits before we hire or build. Signed money, or the door stays shut.",
     6: "Fingerprints, screening, child-safety, compliance — we run it every week. Not a volunteer chore.",
     7: "Families and staff say yes to what this church believes before the weekday starts. We don’t write the confession. Still required — not a form we invent.",
-    8: "Younger kids don’t get an account. A parent or guide walks the morning with them. Optional older-kid login is small and watched.",
+    8: "Younger kids don’t get an account. A parent or guide holds the morning. Optional older-kid login is small and watched.",
     9: "Formation morning versus licensed math. We build the morning. The church never sits in those tools.",
     10: "Company, operator, capital. The operator owns the year and the close.",
     11: "ESA is portable school scholarship dollars families already hold — Florida. A thin ESA-only campus is a six-figure hole. About 96 seats closes it on ESA alone. We only open where the church can fill the room (800+ weekly) — or we budget real CAC. Soft pledges don’t count.",
     12: "We don’t sell software seats to churches. We productize the school year so the second campus runs like the first — without making the pastor the operator. Door rule clones: signed money, deposit before hire, facility and a clean close, families and staff say yes. Soft pledges still don’t open campus #2.",
-    13: "Wrong category. The weekday school of record — not church software.",
+    13: "Wrong category. The weekday school — not church software.",
     14: "Ask: walk an empty Florida wing. Signed money. We take the close. Then sit a morning.",
   };
 
