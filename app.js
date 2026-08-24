@@ -176,6 +176,22 @@
     ui.glanceStarted = 0;
   }
 
+  function tickClocks() {
+    const clock = document.querySelector(".wing__clock > i");
+    if (clock && ui.titleStarted) {
+      clock.style.width = `${Math.min(100, ((Date.now() - ui.titleStarted) / TITLE_MS) * 100)}%`;
+    }
+    const bar = document.querySelector(".bar > i");
+    if (bar && ui.glanceStarted) {
+      bar.style.width = `${Math.min(100, ((Date.now() - ui.glanceStarted) / GLANCE_MS) * 100)}%`;
+    }
+    const live = document.querySelector("[data-glance-left]");
+    if (live && ui.glanceStarted) {
+      const left = Math.max(0, Math.ceil((GLANCE_MS - (Date.now() - ui.glanceStarted)) / 1000));
+      live.textContent = `Winding down — ${left}s. Continuity stays with ${seed.continuity}. No child list leaves this building.`;
+    }
+  }
+
   function beginTape() {
     stopTitle();
     patch({ beat: "daniel" });
@@ -185,14 +201,14 @@
     stopTitle();
     if (prefersReduce()) return;
     ui.titleStarted = Date.now();
-    titleTick = setInterval(draw, 120);
+    titleTick = setInterval(tickClocks, 120);
     titleTimer = setTimeout(beginTape, TITLE_MS);
   }
 
   function playGlance() {
     stopGlance();
     ui.glanceStarted = Date.now();
-    glanceTick = setInterval(draw, 120);
+    glanceTick = setInterval(tickClocks, 120);
     glanceTimer = setTimeout(() => {
       stopGlance();
       flash("Notice given. The church still does not run the school.");
@@ -207,9 +223,7 @@
     ui.mathOpen = false;
     ui.askedCoach = false;
     ui.returnedFromMath = false;
-    const keep = load().completedOnce;
-    save({ ...defaultWorld, completedOnce: keep, beat: "title" });
-    flash("The door is shut again. The church is unsigned. No family is enrolled.");
+    save({ ...defaultWorld, completedOnce: false, beat: "title" });
     draw();
   }
 
@@ -295,7 +309,7 @@
             <p>Families and the church share the same notice. Someone named keeps the children. The church is not left with a school office to run.</p>
             ${
               live
-                ? `<p class="note note--warn">Winding down — ${left}s. Continuity stays with ${escapeHtml(seed.continuity)}. No child list leaves this building.</p>
+                ? `<p class="note note--warn" data-glance-left>Winding down — ${left}s. Continuity stays with ${escapeHtml(seed.continuity)}. No child list leaves this building.</p>
                    <div class="bar" aria-hidden="true"><i style="width:${pct}%"></i></div>`
                 : ""
             }
