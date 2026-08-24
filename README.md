@@ -1,1 +1,9 @@
-This folder is a friend-share fixture: a standalone HTML/CSS/JS walkthrough of the Discipl VC path (Daniel → Camille → Naomi → Eli). It is not production, not the Next.js app, and not the ADR-0001 stack. Open `index.html` locally or via GitHub Pages; demo state lives in `sessionStorage` and Reset restores unsigned Daniel defaults.
+# Discipl static friend-share demo
+
+Throwaway HTML/CSS/JS walkthrough for sharing with a friend.
+
+**Live:** https://discipl-khwa.github.io/discipl-static-demo/
+
+Not the ADR Next.js + Auth.js product (`discipl-khwa/discipl`). Friend-voice copy only.
+
+Walk: Daniel (host church) → Camille (ops) → Naomi (family, free) → Eli (formation preview).

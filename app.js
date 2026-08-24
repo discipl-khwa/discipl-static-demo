@@ -1,4 +1,4 @@
-/* Friend-share fixture. Copy sourced from lib/prototype/copy.ts — do not invent Path A pay copy. */
+/* Friend-share fixture. Friend-voice copy (UX). Do not invent parent pay / sponsor CTAs. */
 (() => {
   const STORAGE_KEY = "discipl_prototype_demo";
   const THEME_KEY = "discipl_demo_theme";
@@ -16,12 +16,12 @@
   const FAMILY_COPY = {
     enrollTitle: "Enroll your family",
     enrollSubtitle:
-      "No tuition bill. Attach your scholarship and assent to the Statement of Faith.",
+      "No tuition bill. Attach your scholarship and affirm what this campus believes.",
     scholarship: "Attach scholarship or ESA",
     covered: "Covered",
-    gap: "A cover gap is owned by the campus — you will not be invoiced.",
+    gap: "If cover is short, the campus owns the gap — you will not be billed.",
     success: "You're enrolled. There is no amount due from you.",
-    paymentAttempted: "Path A does not collect parent payment.",
+    paymentAttempted: "This walkthrough does not collect parent payment.",
   };
 
   const HOST_COPY = {
@@ -31,34 +31,32 @@
     approve: "Approve Discipl as operator",
     emptyHome: "Approve Discipl as the weekday operator to continue.",
     thinChrome:
-      "Thin portal — glance only. No SIS, child roster, or funding editor.",
+      "Glance only. No student list. No school office tools.",
   };
 
   const DEMO_LABEL = "Demo";
 
   const FORMATION_COPY = {
-    accepted:
-      "Formation OS (ADR-0004 Accepted): K–5 preview; 6–8 optional learner",
+    accepted: "Preview with a parent or guide — not a student account.",
     chrome:
-      "Preview only · walk this with a parent or guide. This is not a child login.",
-    eyebrow:
-      "Formation OS (ADR-0004 Accepted): K–5 preview; 6–8 optional learner",
-    title: (firstName) => `${firstName}'s day · K–5 preview`,
+      "Walk this with a parent or guide. Younger kids do not log in alone.",
+    eyebrow: "Preview with a parent or guide — not a student account.",
+    title: (firstName) => `${firstName}'s day`,
     goalsTitle: "Goals",
     goalsHint:
       "Stub list so the walkthrough can show formation targets. Not a live goal engine.",
-    tutorTitle: "SoF-bounded AI tutor",
+    tutorTitle: "Formation coach",
     tutorBound: (version) =>
-      `Bound to Statement of Faith ${version}. The stub will not answer outside that confession.`,
+      `Stays inside what this campus believes (${version}). Won't invent doctrine.`,
     tutorPlaceholder:
-      "Ask a formation question (stub). Answers stay inside the SoF version on this campus.",
+      "Ask a formation question (stub). Answers stay inside what this campus believes.",
     academicsBody: "Math/Science via licensed engine — not built here",
     academicsHint:
-      "Build-vs-buy: Discipl owns formation. Literacy and STEM deep-link to a licensed engine behind ops.",
+      "We build formation. Math and science open in a licensed tool, then you return here.",
     stubLabel: DEMO_LABEL,
-    sofBound: "SoF 2026.1 (fixture)",
+    sofBound: "Campus beliefs · fixture",
     refuse:
-      "I can't go past the Statement of Faith this campus assented (SoF 2026.1, fixture). I won't pick a denomination. Ask your guide.",
+      "I stay inside what this campus believes. I won't pick a denomination for you. Ask your guide.",
     reflectCta: "Write a short reflection",
     checkin: "Guide check-in: Mateo confirmed this morning (fixture).",
     returnDiscipl: "Return to Discipl",
@@ -71,18 +69,20 @@
 
   const SOF_COPY = {
     placeholderBanner:
-      "SoF body is placeholder / fixture 2026.1 — not final confession text.",
+      "Belief text is a fixture placeholder — not the final statement.",
   };
 
   const HOME_COPY = {
-    blurb: `${FORMATION_COPY.accepted} Path A is free for kids. Host is a thin portal. Ops is the thick product.`,
+    blurb:
+      "A church has an empty wing Monday through Friday. Discipl runs the weekday school — the church hosts the building, we carry the risk. Families enroll free. Kids begin with formation.",
   };
 
   const STORY_BEATS = {
-    host: "Host ≠ operate.",
-    director: "No vibes open — honest open-gate.",
-    family: "Scholarship is the payment. Path A is free for kids.",
-    formation: "We own formation. Buy the LMS.",
+    host: "You host the wing. You are not the school.",
+    director:
+      "A campus opens when the money and safety are real — not when the room feels full.",
+    family: "Scholarship is the payment. Parents never see a bill.",
+    formation: "Formation first. Math and science open in tools we license.",
   };
 
   const HANDOFF_COPY = {
@@ -169,16 +169,16 @@
         },
       ],
       tutor: {
-        note: "SoF-bounded AI tutor stub. Answers stay inside Statement of Faith 2026.1.",
+        note: "Formation coach stub. Answers stay inside what this campus believes (fixture).",
       },
     },
     sof: {
       version: "2026.1",
-      body: "Placeholder — Kevin has not supplied Statement of Faith v1 text. This screen shows the assent pattern only. Do not treat this paragraph as a confession.",
+      body: "Placeholder — Kevin has not supplied final belief text. This screen shows the affirm pattern only. Do not treat this paragraph as a confession.",
       checklist: [
         {
           id: "sof_read",
-          label: "I have read Statement of Faith version 2026.1 (placeholder).",
+          label: "I have read what this campus believes, version 2026.1 (placeholder).",
         },
         {
           id: "sof_checklist_pending",
@@ -399,7 +399,7 @@
     if (surface === "host") {
       return {
         title: "Pastor Daniel",
-        sub: "Host portal (thin) · pastor.daniel@example.com",
+        sub: "For the host church · pastor.daniel@example.com",
         nav: [
           ["#/host", "Campus glance"],
           ["#/host/operator", "Operator"],
@@ -418,11 +418,11 @@
     if (surface === "family") {
       return {
         title: "Naomi",
-        sub: "Family · Path A · parent.naomi@example.com",
+        sub: "For families · parent.naomi@example.com",
         nav: [
           ["#/family", "Home"],
           ["#/family/enroll", "Enroll"],
-          ["#/family/sof", "Statement of Faith"],
+          ["#/family/sof", "What this campus believes"],
           ["#/family/docs", "Docs"],
           ["#/family/cover", "Cover"],
         ],
@@ -431,13 +431,13 @@
     if (surface === "formation") {
       return {
         title: "Eli (K–5 preview)",
-        sub: "Formation OS · preview only — no child login",
+        sub: "Formation preview · with a parent or guide",
         nav: [["#/student", "Today"]],
       };
     }
     return {
       title: "Discipl",
-      sub: "Choose a persona · 5-minute VC path",
+      sub: "Choose who you are · 5-minute walk",
       nav: [],
     };
   }
@@ -460,9 +460,9 @@
   function storyBeat(line, extra) {
     return `
       <aside class="story-beat" role="note">
-        <div class="story-beat__mark">VC</div>
+        <div class="story-beat__mark">Story</div>
         <div>
-          <p class="story-beat__label">Story beat</p>
+          <p class="story-beat__label">The story</p>
           <p class="story-beat__line">${escapeHtml(line)}</p>
           ${extra ? `<p class="story-beat__extra">${escapeHtml(extra)}</p>` : ""}
         </div>
@@ -521,7 +521,7 @@
     const state = readState();
     return `
       <div class="panel">
-        <p class="hub-kicker">${badge(DEMO_LABEL, "demo")} 5-minute VC path</p>
+        <p class="hub-kicker">${badge(DEMO_LABEL, "demo")} 5-minute walk</p>
         <h1>Daniel → Camille → Naomi → Eli</h1>
         <p class="lede">${escapeHtml(HOME_COPY.blurb)}</p>
         <div class="btn-row">
@@ -534,10 +534,10 @@
             <h2 class="card-title">One honest script</h2>
             <p class="hint">Reset restores unsigned Daniel defaults. Camille starts blocked. Naomi is not enrolled.</p>
             <ol>
-              <li><strong>Daniel</strong> — approve operator, sign facility, play the ~10s wind-down glance. ${escapeHtml(STORY_BEATS.host)}</li>
-              <li><strong>Camille</strong> — Denied until a signed commitment lands, then Open campus. ${escapeHtml(STORY_BEATS.director)}</li>
-              <li><strong>Naomi</strong> — scholarship is payment; Path A is free. ${escapeHtml(STORY_BEATS.family)}</li>
-              <li><strong>Eli</strong> — Formation OS preview, SoF-bounded refuse, licensed handoff. ${escapeHtml(STORY_BEATS.formation)}</li>
+              <li><strong>Daniel</strong> — ${escapeHtml(STORY_BEATS.host)}</li>
+              <li><strong>Camille</strong> — ${escapeHtml(STORY_BEATS.director)}</li>
+              <li><strong>Naomi</strong> — ${escapeHtml(STORY_BEATS.family)}</li>
+              <li><strong>Eli</strong> — ${escapeHtml(STORY_BEATS.formation)}</li>
             </ol>
             <p class="hint">Campus is ${escapeHtml(statusLabel(state.campusStatus).toLowerCase())}. Operator ${state.operatorApproved ? "approved" : "unsigned"}. Facility ${state.facilitySigned && state.windDownSigned ? "signed" : "unsigned"}.</p>
           </section>
@@ -546,8 +546,8 @@
               ${[
                 ["1", "#/host", "Daniel", "Host glance", "You host the wing. You are not the school operator."],
                 ["2", "#/ops", "Camille", "Open-gate", "Blockers first. Soft interest cannot green the gate."],
-                ["3", "#/family/enroll", "Naomi", "Path A enroll", "Zero pay wall. Scholarship is the payment."],
-                ["4", "#/student", "Eli", "Formation OS", FORMATION_COPY.accepted],
+                ["3", "#/family/enroll", "Naomi", "Naomi enrolls free", "Scholarship is the payment. Parents never see a bill."],
+                ["4", "#/student", "Eli", "Preview with a parent or guide", FORMATION_COPY.accepted],
               ]
                 .map(
                   ([n, href, who, label, hint]) => `
@@ -567,9 +567,9 @@
         <section class="card split">
           <h2 class="card-title">Surface split (locked)</h2>
           <ul>
-            <li>Host (${escapeHtml(SEED.campus.hostName)}, fictional) sees aggregates only — no child roster, no enrollment editor, no funding_commitments editor.</li>
-            <li>Ops owns enrollment, coverage gates, SoF, escrow, Florida pack, and audit.</li>
-            <li>Family Path A has zero pay wall and no sponsor prompts. Cover gaps are owned by ops.</li>
+            <li>Host (${escapeHtml(SEED.campus.hostName)}, fictional) sees aggregates only — no child roster, no enrollment editor, no campus funding list editor.</li>
+            <li>Ops owns enrollment, coverage gates, campus beliefs, escrow, Florida pack, and audit.</li>
+            <li>Families enroll free — no sponsor prompts. If cover is short, the campus owns the gap.</li>
             <li>Sunday check-in is parked. This prototype does not expand it.</li>
           </ul>
         </section>
@@ -590,11 +590,11 @@
     return `
       <div class="panel">
         ${storyBeat(STORY_BEATS.host, HOST_COPY.thinChrome)}
-        ${pageHeader("Host portal · thin", SEED.campus.name, `${SEED.campus.hostName} (fictional) · ${SEED.campus.city}.`)}
+        ${pageHeader("For the host church", SEED.campus.name, `${SEED.campus.hostName} (fictional) · ${SEED.campus.city}.`)}
         <section class="card card--hero">
           <p class="eyebrow">You host, you don't operate</p>
           <h2 class="card-title" style="font-size:1.55rem;margin-top:.55rem">You host the wing. You are not the school operator.</h2>
-          <p class="hint">Glance only. No roster, no SIS, no vendor consoles from this portal.</p>
+          <p class="hint">Glance only. No roster, no school office tools, no vendor consoles from this portal.</p>
         </section>
         <div class="grid-3" style="margin-top:1rem">
           <section class="card">
@@ -622,7 +622,7 @@
                   ${badge(HOST_COPY.statusWindDown, "danger")}
                   <p style="margin:.55rem 0 0">Families and the host share the same notice clock (90 days or the rest of the term). Glance only — ops named the continuity owner.</p>
                 </div>`
-              : `<p class="hint">Play the notice glance so VC sees closure discipline without a SIS.</p>`
+              : `<p class="hint">Play the notice glance so friends see closure discipline without a school office.</p>`
           }
           ${
             ui.glance
@@ -655,7 +655,7 @@
     const state = readState();
     return `
       <div class="panel">
-        ${pageHeader("Host portal · thin", "Invite / approve operator", "Approve Discipl (501(c)(3) ops) as the weekday operator. The church does not become the school of record.")}
+        ${pageHeader("For the host church", "Invite / approve operator", "Approve Discipl (501(c)(3) ops) as the weekday operator. The church does not become the school of record.")}
         <section class="card">
           <div class="row-between">
             <div>
@@ -666,7 +666,7 @@
           </div>
           <dl class="facts">
             <div><dt>What you approve</dt><dd>Weekday operator status</dd></div>
-            <div><dt>What you do not get</dt><dd>Enrollment editor, roster, funding_commitments</dd></div>
+            <div><dt>What you do not get</dt><dd>Enrollment tools, student list, campus funding list</dd></div>
           </dl>
           <div class="btn-row">
             ${
@@ -684,7 +684,7 @@
     const signed = state.facilitySigned && state.windDownSigned;
     return `
       <div class="panel">
-        ${pageHeader("Host portal · thin", "Facility agreement", "FMV vs charged lives on this agreement. The difference is not a general credit.")}
+        ${pageHeader("For the host church", "Facility agreement", "FMV vs charged lives on this agreement. The difference is not a general credit.")}
         <section class="card">
           <div class="row-between">
             <h2 class="card-title">Education wing terms</h2>
@@ -726,7 +726,7 @@
     const winding = state.campusStatus === "wind_down";
     return `
       <div class="panel">
-        ${pageHeader("Host portal · thin", "Wind-down notices & export", "Host export is a separate artifact from the family export. The church is not left with unpaid vendor bills Discipl introduced.")}
+        ${pageHeader("For the host church", "Wind-down notices & export", "Host export is a separate artifact from the family export. The church is not left with unpaid vendor bills Discipl introduced.")}
         ${
           winding
             ? `<section class="card card--danger">${badge(HOST_COPY.statusWindDown, "danger")}<h2 class="card-title" style="margin-top:.5rem">This campus is winding down.</h2><p class="hint">Families and the host were notified on the same date. Discipl will own the public statement unless reassigned.</p></section>`
@@ -749,7 +749,7 @@
       ["escrow_incomplete", "Deposit escrow", "Escrow complete. Hire / build may proceed."],
       ["facility_unsigned", "Facility agreement", "Facility agreement is signed."],
       ["wind_down_unsigned", "Wind-down terms", "Wind-down exhibit is signed."],
-      ["sof_stale", "Statement of Faith", "Required staff assents are current."],
+      ["sof_stale", "What this campus believes", "Required staff assents are current."],
     ].map(([id, title, passText]) => {
       const blocked = gate.reasons.includes(id);
       return { id, title, pass: !blocked, reason: blocked ? REASONS[id] : passText };
@@ -761,7 +761,7 @@
         ${storyBeat(STORY_BEATS.director)}
         ${pageHeader("Ops · Campus director", "Open-gate", "Blockers first. Each conjunct is pass or blocked with a reason — never one vague green.")}
         <section class="card card--hero">
-          <h2 class="card-title">VC beat — denied → signed commitment → open</h2>
+          <h2 class="card-title">beat — denied → signed commitment → open</h2>
           <p class="hint">In-demo recovery. Soft interest still does not count. One click adds the fixture signed gift and completes escrow so Open can succeed.</p>
           <ol class="script" style="padding-left:1.15rem">
             <li style="${!gate.canOpen && !open ? "font-weight:650" : "color:var(--muted)"}">1. Denied — coverage short until a signed instrument lands.</li>
@@ -820,7 +820,7 @@
     return `
       <div class="panel">
         ${storyBeat(STORY_BEATS.family)}
-        ${pageHeader("Family · Path A", `Hello, ${SEED.family.guardianName}`, FAMILY_COPY.enrollSubtitle)}
+        ${pageHeader("For families", `Hello, ${SEED.family.guardianName}`, FAMILY_COPY.enrollSubtitle)}
         ${
           state.campusStatus === "wind_down"
             ? `<section class="card card--danger"><h2 class="card-title">The campus is winding down.</h2><p class="hint">You have at least 90 days' notice or the rest of the term. Download your records. There is still no amount due from you.</p></section>`
@@ -830,7 +830,7 @@
           <h2 class="card-title">Your path</h2>
           <p class="hint">One next step at a time. There is no bill on this path.</p>
           <ul class="list">
-            ${line("Statement of Faith", state.familySofAssented, "#/family/sof")}
+            ${line("What this campus believes", state.familySofAssented, "#/family/sof")}
             ${line("Docs packet", state.familyDocsUploaded, "#/family/docs")}
             ${line(FAMILY_COPY.scholarship, state.familyScholarshipAttached, "#/family/enroll")}
             <li>
@@ -842,7 +842,7 @@
           </ul>
           <div class="btn-row">${linkBtn(state.familyEnrolled ? "Review enrollment" : "Continue enrollment", "#/family/enroll", "lg")}</div>
         </section>
-        <p class="hint">Learners on this household: ${SEED.family.childrenFirstNames.join(", ")}. K–5 children stay records and walk Formation OS with a parent or guide.</p>
+        <p class="hint">Learners on this household: ${SEED.family.childrenFirstNames.join(", ")}. K–5 children stay records and walk formation with a parent or guide.</p>
       </div>`;
   }
 
@@ -871,7 +871,7 @@
       body = `
         <section class="card">
           <h2 class="card-title">${escapeHtml(FAMILY_COPY.scholarship)}</h2>
-          <p class="hint">Provider attachment — not a card to Discipl. Path A does not collect parent payment.</p>
+          <p class="hint">Provider attachment — not a card to Discipl. This walkthrough does not collect parent payment.</p>
           <p>${state.familyScholarshipAttached ? `Attached · ${escapeHtml(SEED.households[0].scholarshipRef)}` : "No scholarship attached yet."}</p>
           <div class="btn-row">
             ${btn("Back", 'data-action="enroll-back"', "secondary")}
@@ -881,8 +881,8 @@
     } else {
       body = `
         <section class="card ${state.familyEnrolled ? "card--success" : ""}">
-          <h2 class="card-title">${state.familyEnrolled ? escapeHtml(FAMILY_COPY.success) : "Ready when SoF and docs are done"}</h2>
-          <p class="hint">Next: assent and docs. Cover status is never a bill.</p>
+          <h2 class="card-title">${state.familyEnrolled ? escapeHtml(FAMILY_COPY.success) : "Ready when beliefs and docs are done"}</h2>
+          <p class="hint">Next: affirm beliefs and finish docs. Cover status is never a bill.</p>
           <div class="btn-row">
             ${btn("Finish enrollment", 'data-action="enroll-finish"', "lg")}
             ${btn("Back", 'data-action="enroll-back"', "secondary")}
@@ -900,7 +900,7 @@
     return `
       <div class="panel">
         ${storyBeat(STORY_BEATS.family)}
-        ${pageHeader("Family · Path A", FAMILY_COPY.enrollTitle, FAMILY_COPY.enrollSubtitle)}
+        ${pageHeader("For families", FAMILY_COPY.enrollTitle, FAMILY_COPY.enrollSubtitle)}
         <ol class="steps">
           ${steps
             .map((label, index) => {
@@ -918,7 +918,7 @@
     const ready = SEED.sof.checklist.every((item) => ui.sofChecked.includes(item.id));
     return `
       <div class="panel">
-        ${pageHeader("Family · Path A", "Statement of Faith", `Version ${SEED.sof.version}. Enrollment cannot finish until a guardian assents to this version.`)}
+        ${pageHeader("For families", "What this campus believes", `Version ${SEED.sof.version}. Enrollment cannot finish until a guardian affirms this version.`)}
         <section class="card">
           <div class="row-between">
             <h2 class="card-title">Version ${SEED.sof.version}</h2>
@@ -948,7 +948,7 @@
     const state = readState();
     return `
       <div class="panel">
-        ${pageHeader("Family · Path A", "Docs upload status", "Immunization packet or a Florida-pack allowed exemption. This is not a payment step.")}
+        ${pageHeader("For families", "Docs upload status", "Immunization packet or a Florida-pack allowed exemption. This is not a payment step.")}
         <section class="card">
           <div class="row-between">
             <h2 class="card-title">Household packet</h2>
@@ -973,7 +973,7 @@
     const covered = SEED.family.coverStatus === "covered";
     return `
       <div class="panel">
-        ${pageHeader("Family · Path A", "Seat cover status", "Covered or gap owned by ops. Never an amount due from the parent.")}
+        ${pageHeader("For families", "Seat cover status", "Covered or gap owned by ops. Never an amount due from the parent.")}
         <section class="card">
           <div class="row-between">
             <h2 class="card-title">Your seats</h2>
@@ -1045,7 +1045,7 @@
             <h2 class="card-title">${escapeHtml(FORMATION_COPY.tutorTitle)}</h2>
             ${badge(FORMATION_COPY.sofBound, "info")}
           </div>
-          <p class="eyebrow" style="margin-top:.7rem">SoF ${preview.sofVersion} · ${FORMATION_COPY.stubLabel}</p>
+          <p class="eyebrow" style="margin-top:.7rem">Campus beliefs ${preview.sofVersion}</p>
           <p class="hint">${escapeHtml(FORMATION_COPY.tutorBound(preview.sofVersion))}</p>
           ${
             ui.tutorRevealed
