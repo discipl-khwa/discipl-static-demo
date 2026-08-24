@@ -330,13 +330,12 @@ kbd {
     color: #111;
   }
 
-  .kicker,
-  li::before {
+  .kicker {
     color: #8a6d3b;
-    background: #8a6d3b;
   }
 
   li::before {
+    background: #8a6d3b;
     height: 1px;
   }
 }
