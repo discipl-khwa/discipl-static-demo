@@ -2,7 +2,7 @@
   const NOTES = {
     1: "The pastor just hosts. We run the weekday school. Families never see a bill.",
     2: "Problem only. The last line is elder fear — not our model. They will not open on hope.",
-    3: "We take the close. No unpaid bills on the church. Child records leave with us. The church was never the operator.",
+    3: "Wind-down on the face: families and church share notice. Church does not inherit a school office. We take the close.",
     4: "Campus card carries the year, staff, door, children, and the safety workflow we run.",
     5: "Deposit money sits before we hire or build. The door opens only when the money is signed.",
     6: "Fingerprints, screening, child-safety, compliance — Discipl ops every week. Not a volunteer chore.",
